@@ -1,5 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
+
 type TProps = {
   assets: {
     symbol: string;
@@ -7,9 +10,12 @@ type TProps = {
     chains: string[] | string;
     protocols: string[] | string;
   }[];
+  setShowModal?: Dispatch<SetStateAction<boolean>>;
 };
 
 const Table = (props: TProps) => {
+  const router = useRouter();
+
   return (
     <div className="overflow-x-auto w-[80%] mx-auto">
       <table className="table">
@@ -30,7 +36,18 @@ const Table = (props: TProps) => {
               <td className="w-[500px]">{asset.chains}</td>
               <td className="w-[300px]">{asset.protocols}</td>
               <td>
-                <button className="btn btn-primary w-full text-md">{Array.isArray(asset.chains) ? "View" : "Deposit"}</button>
+                <button
+                  className="btn btn-primary w-full text-md"
+                  onClick={() => {
+                    if (!props.setShowModal) {
+                      router.push(`/lend/${asset.symbol}`);
+                    } else {
+                      props.setShowModal(true);
+                    }
+                  }}
+                >
+                  {Array.isArray(asset.chains) ? "View" : "Deposit"}
+                </button>
               </td>
             </tr>
           ))}
