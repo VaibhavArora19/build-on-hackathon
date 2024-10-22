@@ -4,7 +4,7 @@ import { TransactionController } from './transaction.controller';
 import { SquidModule } from 'src/libs/squid/squid.module';
 
 @Module({
-  imports: [SquidModule],
+  imports: [SquidModule.register()],
   controllers: [TransactionController],
   providers: [TransactionService],
 })
