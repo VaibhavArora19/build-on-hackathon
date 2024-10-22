@@ -1,3 +1,5 @@
+import Table from "@/components/UI/Table";
+
 export default function Home() {
-  return <button className="btn btn-primary">Build-on</button>;
+  return <Table />;
 }
