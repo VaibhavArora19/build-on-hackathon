@@ -31,7 +31,7 @@ export default function RootLayout({
   const initialState = cookieToInitialState(config, headers().get("cookie"));
 
   return (
-    <html lang="en" data-theme="forest">
+    <html lang="en" data-theme="black">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Web3ModalProvider initialState={initialState}>
           <Navbar />

@@ -13,7 +13,7 @@ const config: Config = {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: ["forest"],
+    themes: ["black"],
   },
 };
 export default config;
