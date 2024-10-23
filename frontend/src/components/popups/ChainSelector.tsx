@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import ChainModal from "./ChainModal";
 
-const ChainSelector = () => {
+const ChainSelector = (props: { setChain: Dispatch<SetStateAction<string>> }) => {
   const [showChainModal, setShowChainModal] = useState(false);
 
-  const handleSelectChain = (chain: { chainId: number; chainName: string; logo: string; shortName: string }) => {};
+  const handleSelectChain = (chain: { chainId: number; chainName: string; logo: string; shortName: string }) => {
+    props.setChain(chain.chainId.toString());
+  };
 
   return (
     <>
@@ -27,7 +29,7 @@ const ChainSelector = () => {
             </span>
           </>
         ) : ( */}
-        <p className="mx-auto">Chain</p>
+        <p className="mx-auto cursor-pointer">Chain</p>
         {/* )} */}
       </div>
 

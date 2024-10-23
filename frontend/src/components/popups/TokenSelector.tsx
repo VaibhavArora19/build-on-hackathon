@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import TokenModal from "./TokenModal";
 
-const TokenSelector = () => {
+const TokenSelector = (props: { setToken: Dispatch<SetStateAction<string>> }) => {
   const [showTokenModal, setShowTokenModal] = useState(false);
   const [selectedToken, setSelectedToken] = useState<{
     tokenName: string;
@@ -12,6 +12,7 @@ const TokenSelector = () => {
 
   const handleTokenSelect = (token: { tokenName: string; logo: string | undefined; balance: number; address: string; decimals: number }) => {
     setSelectedToken(token);
+    props.setToken(token.address);
   };
 
   return (
