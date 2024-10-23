@@ -5,7 +5,11 @@ import { SquidService } from 'src/libs/squid/squid.service';
 export class TransactionService {
   constructor(private readonly squidService: SquidService) {}
 
-  async prepareTransaction() {}
+  async prepareTransaction(transactionPayload: any) {
+    const squidTx = await this.squidService.createQuote(transactionPayload);
+
+    return squidTx;
+  }
 
   async getQuote() {}
 }
