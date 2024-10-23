@@ -11,7 +11,7 @@ const TokenSelector = () => {
   } | null>(null);
 
   const handleTokenSelect = (token: { tokenName: string; logo: string | undefined; balance: number; address: string; decimals: number }) => {
-    setToken(token);
+    setSelectedToken(token);
   };
 
   return (
@@ -34,11 +34,10 @@ const TokenSelector = () => {
 
       {showTokenModal ? (
         <TokenModal
-          //   onSelect={handleTokenSelect}
-          //   onClose={() => {
-          //     setShowTokenModal(false);
-          //   }}
-          type={"a"}
+          onSelect={handleTokenSelect}
+          onClose={() => {
+            setShowTokenModal(false);
+          }}
         />
       ) : null}
     </>

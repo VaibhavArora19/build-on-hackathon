@@ -1,6 +1,7 @@
 "use client";
 
 import ChainSelector from "../popups/ChainSelector";
+import TokenSelector from "../popups/TokenSelector";
 import Modal from "./Modal";
 const SupplyModal = () => {
   return (
@@ -9,6 +10,7 @@ const SupplyModal = () => {
         <div className="flex">
           <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
           <ChainSelector />
+          <TokenSelector />
         </div>
       </div>
     </Modal>

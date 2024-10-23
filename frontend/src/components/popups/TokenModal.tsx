@@ -5,7 +5,14 @@ import Image from "next/image";
 //DUMMY_TOKENS
 const tokens = [];
 
-const showTokenArray: any = [];
+const showTokenArray: {
+  tokenName: string;
+  logo: string;
+  balance: number;
+  address: string;
+  balanceUSD: number;
+  decimals: number;
+}[] = [];
 
 type TokenItemProps = {
   token: {
@@ -20,10 +27,10 @@ type TokenItemProps = {
   onSelect: (token: { tokenName: string; logo: string | undefined; balance: number; address: string; decimals: number }) => void;
 };
 
-const TokenItem: React.FC<TokenItemProps> = ({ token /*onClose, onSelect*/ }) => {
+const TokenItem: React.FC<TokenItemProps> = ({ token, onClose, onSelect }) => {
   const handleClick = () => {
-    // onSelect(token);
-    // onClose();
+    onSelect(token);
+    onClose();
   };
   return (
     <div
@@ -45,12 +52,18 @@ const TokenItem: React.FC<TokenItemProps> = ({ token /*onClose, onSelect*/ }) =>
   );
 };
 
-const TokenModal = () => {
+const TokenModal = ({
+  onClose,
+  onSelect,
+}: {
+  onClose: () => void;
+  onSelect: (token: { tokenName: string; logo: string | undefined; balance: number; address: string; decimals: number }) => void;
+}) => {
   return (
     <Modal isBackdrop={false} className="w-[500px] bg-[#111111] h-[530px] rounded-2xl overflow-scroll">
       <div className="flex items-center justify-between p-6 bg-[#1e1e1e] w-full">
         <p className=" text-white text-base font-semibold">Select Token</p>
-        <IoClose size={18} className="cursor-pointer" />
+        <IoClose size={18} className="cursor-pointer" onClick={onClose} />
       </div>
 
       <div className="flex flex-col space-y-2 p-2 overflow-scroll">
@@ -69,8 +82,8 @@ const TokenModal = () => {
         {showTokenArray &&
           showTokenArray.map((token: any) => (
             <TokenItem
-              //   onSelect={onSelect}
-              //   onClose={onClose}
+              onSelect={onSelect}
+              onClose={onClose}
               token={{
                 tokenName: token.symbol,
                 logo: token.logoURI,

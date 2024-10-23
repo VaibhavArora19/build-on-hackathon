@@ -4,6 +4,8 @@ import ChainModal from "./ChainModal";
 const ChainSelector = () => {
   const [showChainModal, setShowChainModal] = useState(false);
 
+  const handleSelectChain = (chain: { chainId: number; chainName: string; logo: string; shortName: string }) => {};
+
   return (
     <>
       <div
@@ -31,10 +33,10 @@ const ChainSelector = () => {
 
       {showChainModal ? (
         <ChainModal
-        //   onClose={() => {
-        //     setShowChainModal(false);
-        //   }}
-        //   onSelect={handleSelectChain}
+          onClose={() => {
+            setShowChainModal(false);
+          }}
+          onSelect={handleSelectChain}
         />
       ) : null}
     </>

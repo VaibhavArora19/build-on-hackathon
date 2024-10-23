@@ -30,15 +30,17 @@ const ChainItem: React.FC<ChainItemProps> = ({ chain, onClose, onSelect }) => {
   );
 };
 
-const ChainModal = () => {
-  const onClose = () => {};
-  const onSelect = () => {};
+type ChainModalProps = {
+  onClose: () => void;
+  onSelect: (chain: { chainId: number; chainName: string; logo: string; shortName: string }) => void;
+};
 
+const ChainModal: React.FC<ChainModalProps> = ({ onClose, onSelect }) => {
   return (
     <Modal isBackdrop={false} className="w-[500px] bg-[#111111] h-[530px] rounded-2xl overflow-hidden">
       <div className="flex items-center justify-between p-6 bg-[#1e1e1e] w-full">
         <p className=" text-white text-base font-semibold">Select Chain</p>
-        <IoClose size={18} className="cursor-pointer" />
+        <IoClose size={18} className="cursor-pointer" onClick={onClose} />
       </div>
 
       <div className="flex flex-col space-y-2 p-2">
