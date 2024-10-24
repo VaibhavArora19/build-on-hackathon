@@ -1,11 +1,16 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import ChainModal from "./ChainModal";
+import { transactionPayloadActions } from "@/redux/actions";
+import { useDispatch } from "react-redux";
 
-const ChainSelector = (props: { setChain: Dispatch<SetStateAction<string>> }) => {
+const ChainSelector = () => {
+  const dispatch = useDispatch();
   const [showChainModal, setShowChainModal] = useState(false);
 
   const handleSelectChain = (chain: { chainId: number; chainName: string; logo: string; shortName: string }) => {
-    props.setChain(chain.chainId.toString());
+    console.log("entered here", chain.chainId.toString());
+    dispatch(transactionPayloadActions.setFromChain(chain.chainId.toString()));
+    // props.setChain(chain.chainId.toString());
   };
 
   return (

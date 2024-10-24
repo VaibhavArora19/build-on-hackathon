@@ -6,11 +6,9 @@ import TokenSelector from "../popups/TokenSelector";
 import Modal from "./Modal";
 const SupplyModal = (props: { onClose: () => void }) => {
   const [amount, setAmount] = useState("");
-  const [chain, SetChain] = useState("");
-  const [token, setToken] = useState("");
 
   const handleSubmit = () => {
-    if (!amount || !chain || !token) return;
+    if (!amount) return;
 
     //amount = fromamount
     //chain = fromchain
@@ -28,8 +26,8 @@ const SupplyModal = (props: { onClose: () => void }) => {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
-          <ChainSelector setChain={SetChain} />
-          <TokenSelector setToken={setToken} />
+          <ChainSelector />
+          <TokenSelector />
         </div>
         <button className="btn btn-primary w-full mt-10" onClick={handleSubmit}>
           Supply

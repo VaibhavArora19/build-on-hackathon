@@ -1,7 +1,10 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import TokenModal from "./TokenModal";
+import { transactionPayloadActions } from "@/redux/actions";
 
-const TokenSelector = (props: { setToken: Dispatch<SetStateAction<string>> }) => {
+const TokenSelector = () => {
+  //!get the chain here
+
   const [showTokenModal, setShowTokenModal] = useState(false);
   const [selectedToken, setSelectedToken] = useState<{
     tokenName: string;
@@ -12,7 +15,7 @@ const TokenSelector = (props: { setToken: Dispatch<SetStateAction<string>> }) =>
 
   const handleTokenSelect = (token: { tokenName: string; logo: string | undefined; balance: number; address: string; decimals: number }) => {
     setSelectedToken(token);
-    props.setToken(token.address);
+    transactionPayloadActions.setFromToken(token.address);
   };
 
   return (

@@ -37,7 +37,7 @@ type ChainModalProps = {
 
 const ChainModal: React.FC<ChainModalProps> = ({ onClose, onSelect }) => {
   return (
-    <Modal isBackdrop={false} className="w-[500px] bg-[#111111] h-[530px] rounded-2xl overflow-hidden">
+    <Modal isBackdrop={false} className="w-[500px] bg-[#111111] h-[530px] rounded-2xl overflow-y-scroll overflow-x-hidden">
       <div className="flex items-center justify-between p-6 bg-[#1e1e1e] w-full">
         <p className=" text-white text-base font-semibold">Select Chain</p>
         <IoClose size={18} className="cursor-pointer" onClick={onClose} />

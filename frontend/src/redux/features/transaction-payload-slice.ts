@@ -4,6 +4,8 @@ const initialState = {
   toChain: "",
   toToken: "",
   protcolName: "",
+  fromChain: "",
+  fromToken: "",
 };
 
 const transactionPayloadSlice = createSlice({
@@ -19,10 +21,19 @@ const transactionPayloadSlice = createSlice({
     setProtocolName: (state, action) => {
       state.protcolName = action.payload;
     },
+    setFromChain: (state, action) => {
+      console.log("action why are not you workinggggggggg");
+      state.fromChain = action.payload;
+    },
+    setFromToken: (state, action) => {
+      state.fromToken = action.payload;
+    },
     resetState: (state) => {
       state.protcolName = "";
       state.toChain = "";
       state.toToken = "";
+      state.fromChain = "";
+      state.fromToken = "";
     },
   },
 });
