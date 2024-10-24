@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { ethers } from 'ethers';
 import { ODOS_URL } from 'src/constants';
 
 @Injectable()
@@ -23,13 +24,13 @@ export class OdosService {
           inputTokens: [
             {
               amount: fromAmount,
-              tokenAddress: fromToken,
+              tokenAddress: ethers.getAddress(fromToken),
             },
           ],
           outputTokens: [
             {
               proportion: 1,
-              tokenAddress: toToken,
+              tokenAddress: ethers.getAddress(toToken),
             },
           ],
           userAddr: userAddress,
@@ -38,7 +39,9 @@ export class OdosService {
 
       const data = await response.json();
 
-      console.log('data is', data);
+      console.log('Odos quote: ', data);
+
+      return data;
     } catch (error) {
       throw new BadRequestException(error);
     }
@@ -59,7 +62,9 @@ export class OdosService {
 
       const data = await response.json();
 
-      console.log('data is', data);
+      console.log('Odos Tx: ', data);
+
+      return data;
     } catch (error) {
       throw new BadRequestException(error);
     }

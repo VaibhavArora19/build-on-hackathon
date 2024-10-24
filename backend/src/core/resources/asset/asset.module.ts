@@ -11,5 +11,6 @@ import { AssetRepository } from './asset.repository';
   ],
   controllers: [AssetController],
   providers: [AssetService, AssetRepository],
+  exports: [AssetService, AssetRepository],
 })
 export class AssetModule {}

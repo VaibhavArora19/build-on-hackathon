@@ -39,7 +39,7 @@ const TokenItem: React.FC<TokenItemProps> = ({ token, onClose, onSelect }) => {
     >
       <div className="flex items-center gap-2">
         <Image src={token.logo ? token.logo : ""} alt={token.tokenName} height={30} width={30} />
-        <p className="font-semibold text-sm uppercase ">{token.tokenName}</p>
+        <p className="font-semibold text-sm uppercase">{token.tokenName}</p>
       </div>
 
       {token.balance ? (

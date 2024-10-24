@@ -29,7 +29,7 @@ const TokenSelector = (props: { setToken: Dispatch<SetStateAction<string>> }) =>
             <span className="text-xs uppercase">{selectedToken.tokenName}</span>
           </>
         ) : ( */}
-        <p className="mx-auto">Token</p>
+        <p className="mx-auto cursor-pointer">Token</p>
         {/* )} */}
       </div>
 

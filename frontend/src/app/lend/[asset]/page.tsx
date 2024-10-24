@@ -8,19 +8,19 @@ const DUMMY_TOKEN_LIST = [
   {
     symbol: "ETH",
     apy: 0.5,
-    chains: "Ethereum",
+    chains: "42161",
     protocols: "Compound",
   },
   {
     symbol: "ETH",
     apy: 0.5,
-    chains: "Ethereum",
-    protocols: "MakerDAO",
+    chains: "8453",
+    protocols: "Aave",
   },
   {
     symbol: "USDC",
     apy: 0.5,
-    chains: "Ethereum",
+    chains: "10",
     protocols: "Aave",
   },
 ];
@@ -31,7 +31,7 @@ const AssetPage = () => {
   return (
     <div>
       <Table assets={DUMMY_TOKEN_LIST} setShowModal={setShowModal} />
-      {showModal && <SupplyModal />}
+      {showModal && <SupplyModal onClose={() => setShowModal(false)} />}
     </div>
   );
 };

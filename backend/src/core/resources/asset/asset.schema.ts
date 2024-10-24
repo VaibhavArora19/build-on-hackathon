@@ -54,6 +54,18 @@ export class Asset {
   assetDecimals: number;
 
   @Prop({
+    type: String,
+    required: true,
+  })
+  underlyingAssetAddress: string;
+
+  @Prop({
+    type: Number,
+    required: true,
+  })
+  underlyingAssetDecimals: number;
+
+  @Prop({
     type: Number,
     default: 0,
   })

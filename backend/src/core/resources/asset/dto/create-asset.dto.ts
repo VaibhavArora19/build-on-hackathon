@@ -24,4 +24,12 @@ export class CreateAssetDto {
   @IsNumber()
   @IsNotEmpty()
   assetDecimals: number;
+
+  @IsString()
+  @IsNotEmpty()
+  underlyingAssetAddress: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  underlyingAssetDecimals: number;
 }

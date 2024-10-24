@@ -4,20 +4,20 @@ const DUMMY_ASSETS = [
   {
     symbol: "ETH",
     apy: 0.5,
-    chains: ["Ethereum", "Arbitrum"],
-    protocols: ["Aave", "Compound", "MakerDAO"],
+    chains: ["8453", "10"],
+    protocols: ["Aave", "Compound"],
   },
   {
     symbol: "BTC",
     apy: 0.5,
-    chains: ["Bitcoin"],
-    protocols: ["Aave", "Compound", "MakerDAO"],
+    chains: ["42161"],
+    protocols: ["Aave", "Compound"],
   },
   {
     symbol: "USDC",
     apy: 0.5,
-    chains: ["Ethereum", "Arbitrum"],
-    protocols: ["Aave", "Compound", "MakerDAO"],
+    chains: ["59144", "10"],
+    protocols: ["Aave", "Compound"],
   },
 ];
 
