@@ -19,6 +19,11 @@ const transactionPayloadSlice = createSlice({
     setProtocolName: (state, action) => {
       state.protcolName = action.payload;
     },
+    resetState: (state) => {
+      state.protcolName = "";
+      state.toChain = "";
+      state.toToken = "";
+    },
   },
 });
 

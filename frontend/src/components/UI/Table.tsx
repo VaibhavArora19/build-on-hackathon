@@ -1,12 +1,12 @@
 "use client";
 
-import { assetNameToImage } from "@/constants/assetInfo";
 import { CHAIN_CONFIG } from "@/constants/chainInfo";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { protocolNameToImage } from "@/constants/protcolInfo";
 import { TProtocolName } from "@/types/protocol";
+import { transactionPayloadActions } from "@/redux/actions";
 
 type TProps = {
   assets: {
@@ -14,6 +14,7 @@ type TProps = {
     apy: number;
     chains: string[] | string;
     protocols: string[] | string;
+    address: string;
   }[];
   setShowModal?: Dispatch<SetStateAction<boolean>>;
 };
@@ -69,6 +70,9 @@ const Table = (props: TProps) => {
                       router.push(`/lend/${asset.symbol}`);
                     } else {
                       props.setShowModal(true);
+                      transactionPayloadActions.setToChain(asset.chains);
+                      transactionPayloadActions.setToToken(asset.address);
+                      transactionPayloadActions.setProtocolName(asset.protocols);
                     }
                   }}
                 >
