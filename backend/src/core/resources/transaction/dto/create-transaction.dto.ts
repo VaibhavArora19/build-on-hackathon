@@ -24,4 +24,8 @@ export class CreateTransactionDto {
   @IsString()
   @IsNotEmpty()
   userAddress: string;
+
+  @IsString()
+  @IsNotEmpty()
+  protocolName: string;
 }

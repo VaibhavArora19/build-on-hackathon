@@ -66,6 +66,12 @@ export class Asset {
   underlyingAssetDecimals: number;
 
   @Prop({
+    type: String,
+    required: true,
+  })
+  underlyingAssetSymbol: string;
+
+  @Prop({
     type: Number,
     default: 0,
   })

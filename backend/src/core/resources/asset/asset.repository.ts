@@ -81,6 +81,18 @@ export class AssetRepository {
     return data;
   }
 
+  async getAssetByProtocol(asset: Partial<CreateAssetDto>) {
+    const data = await this.assetModel.findOne({
+      underlyingAssetAddress: asset.underlyingAssetAddress,
+      chainId: asset.chainId,
+      protocolName: asset.protocolName,
+    });
+
+    if (!data) throw new NotFoundException('No asset found');
+
+    return data;
+  }
+
   createAsset(asset: CreateAssetDto & { assetId: string }) {
     const newAsset = new this.assetModel(asset);
 

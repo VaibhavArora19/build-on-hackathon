@@ -39,6 +39,12 @@ export class AssetService {
     return data;
   }
 
+  async getAssetByProtocol(createAssetDto: Partial<CreateAssetDto>) {
+    const asset = this.assetRepository.getAssetByProtocol(createAssetDto);
+
+    return asset;
+  }
+
   private generateAssetId(createAssetDto: CreateAssetDto) {
     const assetId =
       createAssetDto.protocolName +

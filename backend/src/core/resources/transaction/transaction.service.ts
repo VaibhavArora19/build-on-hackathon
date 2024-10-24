@@ -14,8 +14,16 @@ export class TransactionService {
   ) {}
 
   //!this is pending and not implemented properly
+  //!here toToken will be underlying token so fetch the token to buy from db
   async prepareTransaction(transactionPayload: CreateTransactionDto) {
     try {
+      //!get the asset
+      const asset = await this.assetService.getAssetByProtocol({
+        underlyingAssetAddress: transactionPayload.toToken,
+        chainId: transactionPayload.toChain,
+        protocolName: transactionPayload.protocolName,
+      });
+
       const squidQuote = await this.squidService.createQuote({
         ...transactionPayload,
         fromAddress: transactionPayload.userAddress,
@@ -24,13 +32,13 @@ export class TransactionService {
 
       console.log('Squid Quote: ', squidQuote);
 
-      const toAmount = squidQuote.estimate.toAmountMin;
+      const toAmountMin = squidQuote.estimate.toAmountMin;
 
       const odosQuote = await this.odosService.getQuote(
         +transactionPayload.toChain,
-        transactionPayload.fromToken, //!this will be the token squid will get on dest chain
-        transactionPayload.fromAmount,
-        transactionPayload.toToken,
+        transactionPayload.toToken, //!this will be the token squid will get on dest chain
+        toAmountMin, //!min amount squid will give on dest chain
+        asset.assetAddress, //!the token user should receive
         transactionPayload.userAddress,
       );
 
@@ -46,7 +54,7 @@ export class TransactionService {
       const postHook: Hook = {
         chainType: ChainType.EVM,
         fundAmount: transactionPayload.fromAmount,
-        fundToken: transactionPayload.fromToken, //!change it too
+        fundToken: transactionPayload.fromToken,
         calls: [
           {
             chainType: ChainType.EVM,
