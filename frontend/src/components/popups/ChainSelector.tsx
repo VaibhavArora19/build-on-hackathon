@@ -2,9 +2,12 @@ import { useState } from "react";
 import ChainModal from "./ChainModal";
 import { transactionPayloadActions } from "@/redux/actions";
 import { useDispatch } from "react-redux";
+import { useTransactionPayloadStore } from "@/redux/hooks";
+import { CHAIN_CONFIG } from "@/constants/chainInfo";
 
 const ChainSelector = () => {
   const dispatch = useDispatch();
+  const { fromChain } = useTransactionPayloadStore();
   const [showChainModal, setShowChainModal] = useState(false);
 
   const handleSelectChain = (chain: { chainId: number; chainName: string; logo: string; shortName: string }) => {
@@ -34,7 +37,7 @@ const ChainSelector = () => {
             </span>
           </>
         ) : ( */}
-        <p className="mx-auto cursor-pointer">Chain</p>
+        <p className="mx-auto cursor-pointer">{fromChain ? CHAIN_CONFIG[fromChain].chainName : "Chain"}</p>
         {/* )} */}
       </div>
 

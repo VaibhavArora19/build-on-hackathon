@@ -3,8 +3,6 @@ import TokenModal from "./TokenModal";
 import { transactionPayloadActions } from "@/redux/actions";
 
 const TokenSelector = () => {
-  //!get the chain here
-
   const [showTokenModal, setShowTokenModal] = useState(false);
   const [selectedToken, setSelectedToken] = useState<{
     tokenName: string;
@@ -32,7 +30,7 @@ const TokenSelector = () => {
             <span className="text-xs uppercase">{selectedToken.tokenName}</span>
           </>
         ) : ( */}
-        <p className="mx-auto cursor-pointer">Token</p>
+        <p className="mx-auto cursor-pointer">{selectedToken ? selectedToken.tokenName : "Token"}</p>
         {/* )} */}
       </div>
 

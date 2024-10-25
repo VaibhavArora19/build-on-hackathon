@@ -4,6 +4,7 @@ import SupplyModal from "@/components/UI/SupplyModal";
 import Table from "@/components/UI/Table";
 import { useState } from "react";
 import { transactionPayloadActions } from "@/redux/actions";
+import { useDispatch } from "react-redux";
 
 const DUMMY_TOKEN_LIST = [
   {
@@ -30,6 +31,7 @@ const DUMMY_TOKEN_LIST = [
 ];
 
 const AssetPage = () => {
+  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState<boolean>(false);
 
   return (
@@ -38,7 +40,7 @@ const AssetPage = () => {
       {showModal && (
         <SupplyModal
           onClose={() => {
-            transactionPayloadActions.resetState();
+            dispatch(transactionPayloadActions.resetState());
             setShowModal(false);
           }}
         />
