@@ -5,6 +5,9 @@ import Table from "@/components/UI/Table";
 import { useState } from "react";
 import { transactionPayloadActions } from "@/redux/actions";
 import { useDispatch } from "react-redux";
+import { useFetchAssetBySymbol } from "@/server/api/asset";
+import { useParams } from "next/navigation";
+import AssetTable from "@/components/UI/AssetTable";
 
 const DUMMY_TOKEN_LIST = [
   {
@@ -30,13 +33,30 @@ const DUMMY_TOKEN_LIST = [
   },
 ];
 
+export type Asset = {
+  underlyingAssetSymbol: string;
+  assetSupplyApy: number;
+  assetSupplyBoostedApy: number;
+  chainId: string;
+  protocolName: string;
+  underlyingAssetAddress: string;
+  underlyingAssetDecimals: number;
+  assetSymbol: string;
+  assetAddress: string;
+  assetDecimals: number;
+};
+
 const AssetPage = () => {
+  const paramName = useParams();
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState<boolean>(false);
+  const { data } = useFetchAssetBySymbol(paramName.asset.toString());
+
+  console.log("data isss ", data);
 
   return (
     <div>
-      <Table assets={DUMMY_TOKEN_LIST} setShowModal={setShowModal} />
+      <AssetTable assets={data?.data.data} setShowModal={setShowModal} />
       {showModal && (
         <SupplyModal
           onClose={() => {

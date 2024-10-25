@@ -27,6 +27,10 @@ export class CreateAssetDto {
 
   @IsString()
   @IsNotEmpty()
+  underlyingAssetSymbol: string;
+
+  @IsString()
+  @IsNotEmpty()
   underlyingAssetAddress: string;
 
   @IsNumber()

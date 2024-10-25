@@ -1,4 +1,4 @@
-import { IoClose, IoSearchOutline } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 import Modal from "../UI/Modal";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -6,17 +6,6 @@ import { useTransactionPayloadStore } from "@/redux/hooks";
 import { squidConfig } from "@/config/squid";
 import { Token } from "@0xsquid/squid-types";
 import { Skeleton } from "@mui/material";
-//DUMMY_TOKENS
-const tokens = [];
-
-const showTokenArray: {
-  tokenName: string;
-  logo: string;
-  balance: number;
-  address: string;
-  balanceUSD: number;
-  decimals: number;
-}[] = [];
 
 type TokenItemProps = {
   token: {

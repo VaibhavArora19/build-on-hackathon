@@ -6,14 +6,15 @@ import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { protocolNameToImage } from "@/constants/protcolInfo";
 import { TProtocolName } from "@/types/protocol";
-import { AssetList } from "@/app/page";
+import { transactionPayloadActions } from "@/redux/actions";
+import { Asset } from "@/app/lend/[asset]/page";
 
 type TProps = {
-  assets: AssetList;
+  assets: Asset[];
   setShowModal?: Dispatch<SetStateAction<boolean>>;
 };
 
-const Table = (props: TProps) => {
+const AssetTable = (props: TProps) => {
   const router = useRouter();
 
   return (
@@ -32,29 +33,13 @@ const Table = (props: TProps) => {
           {props?.assets?.map((asset, index) => (
             <tr className="hover" key={index}>
               <td className="w-[500px]">{asset.underlyingAssetSymbol}</td>
-              <td className="w-[500px]">{asset.totalApys}</td>
+              <td className="w-[500px]">{asset.assetSupplyApy}</td>
               <td className="w-[500px]">
-                {!Array.isArray(asset.chainIds) ? (
-                  <Image src={CHAIN_CONFIG[asset.chainIds]?.chainImageUrl} alt="asset image" width={30} height={30} />
-                ) : (
-                  <div className="flex ">
-                    {asset.chainIds.map((chain, index) => {
-                      return <Image key={index} src={CHAIN_CONFIG[chain]?.chainImageUrl} alt="asset image" width={30} height={30} />;
-                    })}
-                  </div>
-                )}
+                <Image src={CHAIN_CONFIG[asset.chainId]?.chainImageUrl} alt="asset image" width={30} height={30} />
               </td>
               <td className="w-[300px]">
                 {" "}
-                {!Array.isArray(asset.protocolNames) ? (
-                  <Image src={protocolNameToImage(asset.protocolNames as TProtocolName)} alt="asset image" width={30} height={30} />
-                ) : (
-                  <div className="flex ">
-                    {asset.protocolNames.map((protocol, index) => {
-                      return <Image key={index} src={protocolNameToImage(protocol as TProtocolName)} alt="asset image" width={30} height={30} />;
-                    })}
-                  </div>
-                )}
+                {<Image src={protocolNameToImage(asset.protocolName as TProtocolName)} alt="asset image" width={30} height={30} />}
               </td>
               <td>
                 <button
@@ -62,10 +47,15 @@ const Table = (props: TProps) => {
                   onClick={() => {
                     if (!props.setShowModal) {
                       router.push(`/lend/${asset.underlyingAssetSymbol}`);
+                    } else {
+                      props.setShowModal(true);
+                      transactionPayloadActions.setToChain(asset.chainId);
+                      transactionPayloadActions.setToToken(asset.assetAddress);
+                      transactionPayloadActions.setProtocolName(asset.protocolName);
                     }
                   }}
                 >
-                  {Array.isArray(asset.chainIds) ? "View" : "Deposit"}
+                  {Array.isArray(asset.chainId) ? "View" : "Deposit"}
                 </button>
               </td>
             </tr>
@@ -76,4 +66,4 @@ const Table = (props: TProps) => {
   );
 };
 
-export default Table;
+export default AssetTable;

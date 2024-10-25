@@ -18,7 +18,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       useFactory: (configService: ConfigService) => ({
         uri:
           configService.get<string>('MONGODB_URI') ??
-          'mongodb://localhost:27017/spreadefi',
+          'mongodb://localhost:27017/build-on',
       }),
     }),
     TransactionModule,

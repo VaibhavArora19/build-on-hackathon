@@ -1,26 +1,20 @@
-import Table from "@/components/UI/Table";
+"use client";
 
-const DUMMY_ASSETS = [
-  {
-    symbol: "ETH",
-    apy: 0.5,
-    chains: ["8453", "10"],
-    protocols: ["Aave", "Compound"],
-  },
-  {
-    symbol: "BTC",
-    apy: 0.5,
-    chains: ["42161"],
-    protocols: ["Aave", "Compound"],
-  },
-  {
-    symbol: "USDC",
-    apy: 0.5,
-    chains: ["59144", "10"],
-    protocols: ["Aave", "Compound"],
-  },
-];
+import Table from "@/components/UI/Table";
+import { useFetchAsset } from "@/server/api/asset";
+
+export type AssetList = {
+  assetSupplyApys: number[];
+  assetSupplyBoostedApys: number[];
+  chainIds: string[];
+  protocolNames: string[];
+  underlyingAssetSymbol: string;
+  totalApys: number[];
+}[];
 
 export default function Home() {
-  return <Table assets={DUMMY_ASSETS} />;
+  const { data } = useFetchAsset();
+
+  console.log("data is", data?.data.data);
+  return <div>{data?.data ? <Table assets={data?.data.data as AssetList} /> : <></>}</div>;
 }

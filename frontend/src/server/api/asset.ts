@@ -1,3 +1,5 @@
+"use client";
+
 import { ASSETS } from "@/constants/query";
 import { useQuery } from "@tanstack/react-query";
 
@@ -27,6 +29,7 @@ export const useFetchAsset = () => {
 export const useFetchAssetBySymbol = (symbol: string) => {
   const fetchAssetBySymbol = async () => {
     try {
+      console.log("I entered here");
       const response = await fetch(`/backend/asset/symbol?symbol=${symbol}`);
 
       const data = await response.json();

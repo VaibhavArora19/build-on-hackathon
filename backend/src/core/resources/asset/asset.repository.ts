@@ -12,8 +12,7 @@ export class AssetRepository {
     const data = await this.assetModel.aggregate([
       {
         $group: {
-          _id: { assetSymbol: '$assetSymbol' },
-          points: { $addToSet: '$points' },
+          _id: { underlyingAssetSymbol: '$underlyingAssetSymbol' },
           chainIds: { $addToSet: '$chainId' },
           protocolNames: { $addToSet: '$protocolName' },
           assetSupplyApys: { $push: '$assetSupplyApy' },
@@ -23,12 +22,11 @@ export class AssetRepository {
       {
         $project: {
           _id: 0,
-          assetSymbol: '$_id.assetSymbol',
+          underlyingAssetSymbol: '$_id.underlyingAssetSymbol',
           chainIds: 1,
           protocolNames: 1,
           assetSupplyApys: 1,
           assetSupplyBoostedApys: 1,
-          points: 1,
         },
       },
       {
@@ -66,7 +64,9 @@ export class AssetRepository {
   }
 
   async getAssetBySymbol(symbol: string) {
-    const data = await this.assetModel.find({ assetSymbol: symbol });
+    const data = await this.assetModel.find({ underlyingAssetSymbol: symbol });
+
+    console.log('data is', data);
 
     if (data.length === 0) throw new NotFoundException('No asset found');
 

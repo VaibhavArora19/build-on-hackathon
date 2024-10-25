@@ -1,3 +1,5 @@
+"use client";
+
 import { TRANSACTIONS } from "@/constants/query";
 import { useQuery } from "@tanstack/react-query";
 
