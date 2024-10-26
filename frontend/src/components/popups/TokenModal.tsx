@@ -58,13 +58,10 @@ const TokenModal = ({
 
   useEffect(() => {
     async function getTokens() {
-      console.log("chain", fromChain);
       if (!fromChain) return;
-      console.log("tokens to hai");
       const squid = await squidConfig();
 
       const tokens = squid.tokens.filter((token) => token.chainId === fromChain);
-      console.log("tokens are", tokens);
 
       setTokenList(tokens);
       setIsLoading(false);

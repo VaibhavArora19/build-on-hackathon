@@ -4,6 +4,8 @@ import { SquidService } from 'src/libs/squid/squid.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { ChainType, Hook, SquidCallType } from '@0xsquid/squid-types';
 import { AssetService } from '../asset/asset.service';
+import { ethers } from 'ethers';
+import { ERC20_ABI } from 'src/constants/abi';
 
 @Injectable()
 export class TransactionService {
@@ -49,24 +51,44 @@ export class TransactionService {
         transactionPayload.userAddress,
       );
 
+      const erc20Interface = new ethers.Interface(ERC20_ABI);
+
+      const approveTx = erc20Interface.encodeFunctionData('approve', [
+        odosTx.transaction.to,
+        '1',
+      ]);
+
       const postHook: Omit<Hook, 'fundAmount' | 'fundToken'> = {
         chainType: ChainType.EVM,
+        description: 'test deposit',
         calls: [
+          {
+            chainType: ChainType.EVM,
+            callType: SquidCallType.FULL_TOKEN_BALANCE,
+            target: transactionPayload.toToken,
+            callData: approveTx,
+            estimatedGas: '400000',
+            value: '0',
+            payload: {
+              tokenAddress: transactionPayload.toToken,
+              inputPos: 1,
+            },
+          },
           {
             chainType: ChainType.EVM,
             callType: SquidCallType.DEFAULT,
             target: odosTx.transaction.to,
             callData: odosTx.transaction.data,
             estimatedGas: '500000',
+            value: '0',
             payload: {
               tokenAddress: transactionPayload.toToken,
               inputPos: 1,
             },
           },
         ],
-        description: 'Test',
-        logoURI: 'anything',
-        provider: 'Test',
+        logoURI: 'test URI',
+        provider: 'test',
       };
 
       const squidTx = await this.squidService.createQuote({

@@ -28,7 +28,6 @@ export class AssetController {
   @HttpCode(HttpStatus.OK)
   @Get('symbol')
   async getAssetBySymbol(@Query('symbol') symbol: string) {
-    console.log('request came with symbol', symbol);
     const data = await this.assetService.getAssetBySymbol(symbol);
 
     return {
@@ -53,7 +52,6 @@ export class AssetController {
   @HttpCode(HttpStatus.CREATED)
   @Post()
   async createAsset(@Body() createAssetDto: CreateAssetDto) {
-    console.log('data', createAssetDto);
     const data = await this.assetService.createAsset(createAssetDto);
 
     return {

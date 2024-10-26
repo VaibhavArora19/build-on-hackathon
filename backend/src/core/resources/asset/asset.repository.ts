@@ -66,8 +66,6 @@ export class AssetRepository {
   async getAssetBySymbol(symbol: string) {
     const data = await this.assetModel.find({ underlyingAssetSymbol: symbol });
 
-    console.log('data is', data);
-
     if (data.length === 0) throw new NotFoundException('No asset found');
 
     return data;

@@ -29,7 +29,6 @@ const SupplyModal = (props: { onClose: () => void }) => {
   const prepareTransactionPayload = useCallback(() => {
     console.log("called", { fromToken, fromChain, toToken, toChain, protocolName, fromDecimals, address });
     if (!amount || !fromToken || !fromChain || !toToken || !toChain || !protocolName || !address) return;
-    console.log("went through here");
 
     setTransactionPayload({
       fromChain,

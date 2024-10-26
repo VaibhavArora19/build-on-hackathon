@@ -39,8 +39,6 @@ export class OdosService {
 
       const data = await response.json();
 
-      console.log('Odos quote: ', data);
-
       return data;
     } catch (error) {
       throw new BadRequestException(error);
@@ -61,8 +59,6 @@ export class OdosService {
       });
 
       const data = await response.json();
-
-      console.log('Odos Tx: ', data);
 
       return data;
     } catch (error) {
