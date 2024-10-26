@@ -1,11 +1,13 @@
 "use client";
 
+import { TTransactionPayload } from "@/components/UI/SupplyModal";
 import { TRANSACTIONS } from "@/constants/query";
 import { useQuery } from "@tanstack/react-query";
 
-export const useTransactionBuilder = (transactionPayload: any) => {
+export const useTransactionBuilder = (transactionPayload: TTransactionPayload | null) => {
   const prepareTransaction = async () => {
     try {
+      console.log("Preparing Transaction");
       const response = await fetch("/backend/transaction/prepare", {
         method: "POST",
         headers: {
@@ -16,6 +18,7 @@ export const useTransactionBuilder = (transactionPayload: any) => {
 
       const data = await response.json();
 
+      console.log("data is", data);
       return data;
     } catch (error) {
       console.log("error: ", error);

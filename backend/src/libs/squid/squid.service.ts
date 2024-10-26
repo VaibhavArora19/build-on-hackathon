@@ -53,14 +53,15 @@ export class SquidService {
         toAddress: squidQuoteArgs.toAddress,
         enableBoost: true,
       };
-
       if (squidQuoteArgs?.preHook) {
         config.preHook = squidQuoteArgs.preHook;
       }
 
-      if (squidQuoteArgs.postHook) {
+      if (squidQuoteArgs?.postHook) {
         config.postHook = squidQuoteArgs.postHook;
       }
+
+      console.log('config is', config);
 
       const { route } = await this.squid.getRoute(config);
 

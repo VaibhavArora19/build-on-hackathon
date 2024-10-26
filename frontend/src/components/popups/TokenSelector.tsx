@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TokenModal from "./TokenModal";
 import { transactionPayloadActions } from "@/redux/actions";
+import { useDispatch } from "react-redux";
 
 const TokenSelector = () => {
   const [showTokenModal, setShowTokenModal] = useState(false);
@@ -9,11 +10,14 @@ const TokenSelector = () => {
     logo: string | undefined;
     balance: number;
     address: string;
+    decimals: number;
   } | null>(null);
+  const dispatch = useDispatch();
 
   const handleTokenSelect = (token: { tokenName: string; logo: string | undefined; balance: number; address: string; decimals: number }) => {
     setSelectedToken(token);
-    transactionPayloadActions.setFromToken(token.address);
+    dispatch(transactionPayloadActions.setFromToken(token.address));
+    dispatch(transactionPayloadActions.setFromDecimals(token.decimals));
   };
 
   return (

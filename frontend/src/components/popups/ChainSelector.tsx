@@ -12,6 +12,7 @@ const ChainSelector = () => {
 
   const handleSelectChain = (chain: { chainId: number; chainName: string; logo: string; shortName: string }) => {
     console.log("entered here", chain.chainId.toString());
+    if (chain.chainId.toString() !== fromChain) dispatch(transactionPayloadActions.setFromToken(""));
     dispatch(transactionPayloadActions.setFromChain(chain.chainId.toString()));
     // props.setChain(chain.chainId.toString());
   };

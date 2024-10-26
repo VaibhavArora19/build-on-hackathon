@@ -30,8 +30,6 @@ export class TransactionService {
         toAddress: transactionPayload.userAddress,
       });
 
-      console.log('Squid Quote: ', squidQuote);
-
       const toAmountMin = squidQuote.estimate.toAmountMin;
 
       const odosQuote = await this.odosService.getQuote(
@@ -51,10 +49,8 @@ export class TransactionService {
         transactionPayload.userAddress,
       );
 
-      const postHook: Hook = {
+      const postHook: Omit<Hook, 'fundAmount' | 'fundToken'> = {
         chainType: ChainType.EVM,
-        fundAmount: transactionPayload.fromAmount,
-        fundToken: transactionPayload.fromToken,
         calls: [
           {
             chainType: ChainType.EVM,
@@ -62,20 +58,31 @@ export class TransactionService {
             target: odosTx.transaction.to,
             callData: odosTx.transaction.data,
             estimatedGas: '500000',
+            payload: {
+              tokenAddress: transactionPayload.toToken,
+              inputPos: 1,
+            },
           },
         ],
         description: 'Test',
-        logoURI: '',
+        logoURI: 'anything',
         provider: 'Test',
       };
 
       const squidTx = await this.squidService.createQuote({
         ...transactionPayload,
+        fromAddress: transactionPayload.userAddress,
+        toAddress: transactionPayload.userAddress,
         postHook,
       });
 
-      return squidTx;
+      return {
+        to: '',
+        type: 'SQUID',
+        tx: squidTx,
+      };
     } catch (error) {
+      console.log('error: ', error);
       throw new BadRequestException(error);
     }
   }

@@ -8,6 +8,7 @@ import { protocolNameToImage } from "@/constants/protcolInfo";
 import { TProtocolName } from "@/types/protocol";
 import { transactionPayloadActions } from "@/redux/actions";
 import { Asset } from "@/app/lend/[asset]/page";
+import { useDispatch } from "react-redux";
 
 type TProps = {
   assets: Asset[];
@@ -16,6 +17,7 @@ type TProps = {
 
 const AssetTable = (props: TProps) => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   return (
     <div className="overflow-x-auto w-[80%] mx-auto">
@@ -49,9 +51,9 @@ const AssetTable = (props: TProps) => {
                       router.push(`/lend/${asset.underlyingAssetSymbol}`);
                     } else {
                       props.setShowModal(true);
-                      transactionPayloadActions.setToChain(asset.chainId);
-                      transactionPayloadActions.setToToken(asset.assetAddress);
-                      transactionPayloadActions.setProtocolName(asset.protocolName);
+                      dispatch(transactionPayloadActions.setToChain(asset.chainId));
+                      dispatch(transactionPayloadActions.setToToken(asset.underlyingAssetAddress));
+                      dispatch(transactionPayloadActions.setProtocolName(asset.protocolName));
                     }
                   }}
                 >

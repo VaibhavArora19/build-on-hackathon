@@ -3,9 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   toChain: "",
   toToken: "",
-  protcolName: "",
+  protocolName: "",
   fromChain: "",
   fromToken: "",
+  fromDecimals: 0,
 };
 
 const transactionPayloadSlice = createSlice({
@@ -19,17 +20,19 @@ const transactionPayloadSlice = createSlice({
       state.toToken = action.payload;
     },
     setProtocolName: (state, action) => {
-      state.protcolName = action.payload;
+      state.protocolName = action.payload;
     },
     setFromChain: (state, action) => {
-      console.log("action why are not you workinggggggggg");
       state.fromChain = action.payload;
     },
     setFromToken: (state, action) => {
       state.fromToken = action.payload;
     },
+    setFromDecimals: (state, action) => {
+      state.fromDecimals = action.payload;
+    },
     resetState: (state) => {
-      state.protcolName = "";
+      state.protocolName = "";
       state.toChain = "";
       state.toToken = "";
       state.fromChain = "";

@@ -1,18 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ChainSelector from "../popups/ChainSelector";
 import TokenSelector from "../popups/TokenSelector";
 import Modal from "./Modal";
+import { useTransactionPayloadStore } from "@/redux/hooks";
+import { useTransactionBuilder } from "@/server/api/transaction";
+import { parseUnits } from "viem";
+import { useAccount } from "wagmi";
+
+export type TTransactionPayload = {
+  fromChain: string;
+  fromToken: string;
+  toToken: string;
+  toChain: string;
+  fromAmount: string;
+  protocolName: string;
+  userAddress: string;
+};
+
 const SupplyModal = (props: { onClose: () => void }) => {
+  const { fromToken, fromChain, toToken, toChain, protocolName, fromDecimals } = useTransactionPayloadStore();
   const [amount, setAmount] = useState("");
+  const { address } = useAccount();
+  const [transactionPayload, setTransactionPayload] = useState<TTransactionPayload | null>(null);
+  const { data } = useTransactionBuilder(transactionPayload);
+
+  const prepareTransactionPayload = useCallback(() => {
+    console.log("called", { fromToken, fromChain, toToken, toChain, protocolName, fromDecimals, address });
+    if (!amount || !fromToken || !fromChain || !toToken || !toChain || !protocolName || !address) return;
+    console.log("went through here");
+
+    setTransactionPayload({
+      fromChain,
+      fromToken,
+      toToken,
+      toChain,
+      fromAmount: parseUnits(amount, fromDecimals).toString(),
+      protocolName,
+      userAddress: address,
+    });
+  }, [amount, fromToken, fromChain, toToken, toChain, protocolName, fromDecimals, address]);
+
+  useEffect(() => {
+    const debouncedFunction = setTimeout(() => {
+      prepareTransactionPayload();
+    }, 1500);
+
+    return () => clearTimeout(debouncedFunction);
+  }, [amount, fromToken, fromChain, toToken, toChain, protocolName, address]);
 
   const handleSubmit = () => {
-    if (!amount) return;
-
-    //amount = fromamount
-    //chain = fromchain
-    //token == fromtoken
+    if (!transactionPayload) return;
   };
 
   return (
