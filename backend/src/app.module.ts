@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TransactionModule } from './core/resources/transaction/transaction.module';
 import { AssetModule } from './core/resources/asset/asset.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { PositionsModule } from './core/resources/positions/positions.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     }),
     TransactionModule,
     AssetModule,
+    PositionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
