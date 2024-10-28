@@ -1,6 +1,6 @@
 import { EvmChain } from '@moralisweb3/common-evm-utils';
 
-export const MORALIS_CHAINS = [
+export const COVALENT_CHAINS = [
   {
     chainId: 42161,
     id: EvmChain.ARBITRUM,

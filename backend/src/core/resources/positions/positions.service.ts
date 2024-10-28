@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import Moralis from 'moralis';
-import { MORALIS_CHAINS } from 'src/constants/chain';
+import { COVALENT_CHAINS } from 'src/constants/chain';
 import { AssetService } from '../asset/asset.service';
 import { ethers } from 'ethers';
+import { ChainID, CovalentClient } from '@covalenthq/client-sdk';
 
 @Injectable()
 export class PositionsService {
@@ -15,34 +15,58 @@ export class PositionsService {
   async getPositions(address: string) {
     const assets = await this.assetService.getAllAssets();
 
-    if (!Moralis.Core.isStarted) {
-      await Moralis.start({
-        apiKey: this.configService.get<string>('MORALIS_API_KEY'),
-      });
-    }
-
-    const balances = await Promise.all(
-      MORALIS_CHAINS.map((chain) =>
-        Moralis.EvmApi.token.getWalletTokenBalances({
-          address,
-          chain: chain.id,
-        }),
-      ),
+    const client = new CovalentClient(
+      this.configService.get<string>('COVALENT_KEY'),
     );
 
-    const allChainBalances = [];
+    const balances = await Promise.all(
+      COVALENT_CHAINS.map((chain) => {
+        return client.BalanceService.getTokenBalancesForWalletAddress(
+          chain.chainId as ChainID,
+          address,
+        );
+      }),
+    );
+    const allBalances = [];
 
     balances.forEach((chainBalance) => {
-      chainBalance.raw.forEach((balance) => allChainBalances.push(balance));
+      chainBalance.data.items.forEach((balance) =>
+        allBalances.push({
+          address: balance.contract_address,
+          symbol: balance.contract_ticker_symbol,
+          name: balance.contract_name,
+          balance: balance.balance.toString(),
+          balanceUSD: balance.pretty_quote_24h,
+        }),
+      );
     });
 
-    const formattedBalance = allChainBalances.filter((balance) =>
+    const formattedBalance = allBalances.filter((balance) =>
       assets.some(
         (asset) =>
           ethers.getAddress(asset.assetAddress) ===
-          ethers.getAddress(balance.token_address),
+            ethers.getAddress(balance.address) &&
+          balance.symbol.toLowerCase() === asset.assetSymbol.toLowerCase(),
       ),
     );
-    return formattedBalance;
+
+    const balanceWithChain = formattedBalance.map((balance) => {
+      const asset = assets.find(
+        (asset) =>
+          ethers.getAddress(asset.assetAddress) ===
+          ethers.getAddress(balance.address),
+      );
+
+      if (asset)
+        return {
+          ...balance,
+          chainId: asset.chainId,
+          protocolName: asset.protocolName,
+          underlyingAssetSymbol: asset.underlyingAssetSymbol,
+          underlyingAssetAddress: asset.underlyingAssetAddress,
+        };
+      return balance;
+    });
+    return balanceWithChain;
   }
 }
