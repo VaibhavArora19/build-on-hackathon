@@ -55,12 +55,13 @@ const SupplyModal = (props: { onClose: () => void }) => {
 
   return (
     <Modal className="w-[500px] p-5" onClose={props.onClose}>
+      <h1 className="mb-4 font-semibold text-[19px]">Supply Asset</h1>
       <div>
         <div className="flex">
           <input
             type="text"
             placeholder="Enter amount"
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs mt-2"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />

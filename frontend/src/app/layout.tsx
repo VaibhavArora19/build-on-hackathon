@@ -7,6 +7,7 @@ import { cookieToInitialState } from "wagmi";
 import { headers } from "next/headers";
 import { config } from "@/config/wagmi";
 import { ReduxProvider } from "@/redux/reduxProvider";
+import BasicInfo from "@/components/Info/BasicInfo";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,6 +38,7 @@ export default function RootLayout({
         <ReduxProvider>
           <Web3ModalProvider initialState={initialState}>
             <Navbar />
+            <BasicInfo />
             {children}
           </Web3ModalProvider>
         </ReduxProvider>
