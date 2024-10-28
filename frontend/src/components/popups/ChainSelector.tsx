@@ -5,15 +5,19 @@ import { useDispatch } from "react-redux";
 import { useTransactionPayloadStore } from "@/redux/hooks";
 import { CHAIN_CONFIG } from "@/constants/chainInfo";
 
-const ChainSelector = () => {
+const ChainSelector = (props: { type: "SUPPLY" | "WITHDRAW" }) => {
   const dispatch = useDispatch();
-  const { fromChain } = useTransactionPayloadStore();
+  const { fromChain, toChain } = useTransactionPayloadStore();
   const [showChainModal, setShowChainModal] = useState(false);
 
   const handleSelectChain = (chain: { chainId: number; chainName: string; logo: string; shortName: string }) => {
-    console.log("entered here", chain.chainId.toString());
-    if (chain.chainId.toString() !== fromChain) dispatch(transactionPayloadActions.setFromToken(""));
-    dispatch(transactionPayloadActions.setFromChain(chain.chainId.toString()));
+    if (chain.chainId.toString() !== fromChain && props.type === "SUPPLY") {
+      dispatch(transactionPayloadActions.setFromToken(""));
+      dispatch(transactionPayloadActions.setFromChain(chain.chainId.toString()));
+    } else if (chain.chainId.toString() !== toChain && props.type === "WITHDRAW") {
+      dispatch(transactionPayloadActions.setToToken(""));
+      dispatch(transactionPayloadActions.setToChain(chain.chainId.toString()));
+    }
     // props.setChain(chain.chainId.toString());
   };
 
@@ -38,7 +42,13 @@ const ChainSelector = () => {
             </span>
           </>
         ) : ( */}
-        <p className="mx-auto cursor-pointer">{fromChain ? CHAIN_CONFIG[fromChain].chainName : "Chain"}</p>
+        <p className="mx-auto cursor-pointer">
+          {props.type === "SUPPLY" && fromChain
+            ? CHAIN_CONFIG[fromChain].chainName
+            : props.type === "WITHDRAW" && toChain
+            ? CHAIN_CONFIG[toChain].chainName
+            : "Chain"}
+        </p>
         {/* )} */}
       </div>
 

@@ -3,7 +3,7 @@ import TokenModal from "./TokenModal";
 import { transactionPayloadActions } from "@/redux/actions";
 import { useDispatch } from "react-redux";
 
-const TokenSelector = () => {
+const TokenSelector = (props: { type: "SUPPLY" | "WITHDRAW" }) => {
   const [showTokenModal, setShowTokenModal] = useState(false);
   const [selectedToken, setSelectedToken] = useState<{
     tokenName: string;
@@ -16,8 +16,12 @@ const TokenSelector = () => {
 
   const handleTokenSelect = (token: { tokenName: string; logo: string | undefined; balance: number; address: string; decimals: number }) => {
     setSelectedToken(token);
-    dispatch(transactionPayloadActions.setFromToken(token.address));
-    dispatch(transactionPayloadActions.setFromDecimals(token.decimals));
+    if (props.type === "SUPPLY") {
+      dispatch(transactionPayloadActions.setFromToken(token.address));
+      dispatch(transactionPayloadActions.setFromDecimals(token.decimals));
+    } else {
+      dispatch(transactionPayloadActions.setToToken(token.address));
+    }
   };
 
   return (

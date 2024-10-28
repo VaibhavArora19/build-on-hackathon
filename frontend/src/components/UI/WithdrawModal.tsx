@@ -19,7 +19,7 @@ export type TTransactionPayload = {
   userAddress: string;
 };
 
-const SupplyModal = (props: { onClose: () => void }) => {
+const WithdrawModal = (props: { onClose: () => void }) => {
   const { fromToken, fromChain, toToken, toChain, protocolName, fromDecimals } = useTransactionPayloadStore();
   const [amount, setAmount] = useState("");
   const { address } = useAccount();
@@ -27,7 +27,6 @@ const SupplyModal = (props: { onClose: () => void }) => {
   const { data } = useTransactionBuilder(transactionPayload);
 
   const prepareTransactionPayload = useCallback(() => {
-    console.log("called", { fromToken, fromChain, toToken, toChain, protocolName, fromDecimals, address });
     if (!amount || !fromToken || !fromChain || !toToken || !toChain || !protocolName || !address) return;
 
     setTransactionPayload({
@@ -64,15 +63,15 @@ const SupplyModal = (props: { onClose: () => void }) => {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
-          <ChainSelector type="SUPPLY" />
-          <TokenSelector type="SUPPLY" />
+          <ChainSelector type="WITHDRAW" />
+          <TokenSelector type="WITHDRAW" />
         </div>
         <button className="btn btn-primary w-full mt-10" onClick={handleSubmit}>
-          Supply
+          Withdraw
         </button>
       </div>
     </Modal>
   );
 };
 
-export default SupplyModal;
+export default WithdrawModal;

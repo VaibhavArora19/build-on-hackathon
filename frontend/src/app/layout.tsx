@@ -33,7 +33,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-theme="black">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-noto-sans`}>
         <ReduxProvider>
           <Web3ModalProvider initialState={initialState}>
             <Navbar />

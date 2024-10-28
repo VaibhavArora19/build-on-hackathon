@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction } from "react";
 import { protocolNameToImage } from "@/constants/protcolInfo";
 import { TProtocolName } from "@/types/protocol";
 import { AssetList } from "@/app/page";
+import { assetNameToImage } from "@/constants/assetInfo";
 
 type TProps = {
   assets: AssetList;
@@ -31,7 +32,10 @@ const Table = (props: TProps) => {
         <tbody>
           {props?.assets?.map((asset, index) => (
             <tr className="hover" key={index}>
-              <td className="w-[500px]">{asset.underlyingAssetSymbol}</td>
+              <td className="w-[500px] flex pt-4">
+                <Image src={assetNameToImage(asset.underlyingAssetSymbol)} alt="asset image" width={30} height={30} />
+                <span className="text-center align-middle pt-2 ml-2">{asset.underlyingAssetSymbol}</span>
+              </td>
               <td className="w-[500px]">{asset.totalApys}</td>
               <td className="w-[500px]">
                 {!Array.isArray(asset.chainIds) ? (

@@ -9,6 +9,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        "noto-sans": ["Noto-Sans", "sans-serif"],
+      },
     },
   },
   plugins: [daisyui],

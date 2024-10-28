@@ -64,6 +64,7 @@ export class PositionsService {
           protocolName: asset.protocolName,
           underlyingAssetSymbol: asset.underlyingAssetSymbol,
           underlyingAssetAddress: asset.underlyingAssetAddress,
+          assetDecimals: asset.assetDecimals,
         };
       return balance;
     });
