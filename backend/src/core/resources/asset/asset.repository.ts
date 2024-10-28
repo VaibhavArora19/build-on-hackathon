@@ -63,6 +63,12 @@ export class AssetRepository {
     return data;
   }
 
+  async getAllAssets() {
+    const assets = await this.assetModel.find();
+
+    return assets;
+  }
+
   async getAssetBySymbol(symbol: string) {
     const data = await this.assetModel.find({ underlyingAssetSymbol: symbol });
 
