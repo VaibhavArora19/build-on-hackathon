@@ -6,3 +6,7 @@ export enum ASSETS {
 export enum TRANSACTIONS {
   FETCH = "FETCH_TRANSACTIONS",
 }
+
+export enum POSITIONS {
+  FETCH = "FETCH_POSITIONS",
+}
