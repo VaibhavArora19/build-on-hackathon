@@ -33,19 +33,19 @@ const Table = (props: TProps) => {
           {props?.assets?.map((asset, index) => (
             <tr className="hover" key={index}>
               <td className="w-[500px] flex pt-4">
-                <Image src={assetNameToImage(asset.underlyingAssetSymbol)} alt="asset image" width={30} height={30} />
-                <span className="text-center align-middle pt-2 ml-2">{asset.underlyingAssetSymbol}</span>
+                <Image src={assetNameToImage(asset.underlyingAssetSymbol)} alt="asset image" width={28} height={28} />
+                <span className="text-center align-middle pt-1 ml-2">{asset.underlyingAssetSymbol}</span>
               </td>
               <td className="w-[500px]">
                 {asset.totalApys.length > 1 ? asset.totalApys[0] + "% - " + asset.totalApys[asset.totalApys.length - 1] + "%" : asset.totalApys + "%"}
               </td>
               <td className="w-[500px]">
                 {!Array.isArray(asset.chainIds) ? (
-                  <Image src={CHAIN_CONFIG[asset.chainIds]?.chainImageUrl} alt="asset image" width={30} height={30} />
+                  <Image src={CHAIN_CONFIG[asset.chainIds]?.chainImageUrl} alt="asset image" width={28} height={28} />
                 ) : (
                   <div className="flex ">
                     {asset.chainIds.map((chain, index) => {
-                      return <Image key={index} src={CHAIN_CONFIG[chain]?.chainImageUrl} alt="asset image" width={30} height={30} />;
+                      return <Image key={index} src={CHAIN_CONFIG[chain]?.chainImageUrl} alt="asset image" width={28} height={28} />;
                     })}
                   </div>
                 )}
@@ -53,11 +53,11 @@ const Table = (props: TProps) => {
               <td className="w-[300px]">
                 {" "}
                 {!Array.isArray(asset.protocolNames) ? (
-                  <Image src={protocolNameToImage(asset.protocolNames as TProtocolName)} alt="asset image" width={30} height={30} />
+                  <Image src={protocolNameToImage(asset.protocolNames as TProtocolName)} alt="asset image" width={28} height={28} />
                 ) : (
                   <div className="flex ">
                     {asset.protocolNames.map((protocol, index) => {
-                      return <Image key={index} src={protocolNameToImage(protocol as TProtocolName)} alt="asset image" width={30} height={30} />;
+                      return <Image key={index} src={protocolNameToImage(protocol as TProtocolName)} alt="asset image" width={28} height={28} />;
                     })}
                   </div>
                 )}

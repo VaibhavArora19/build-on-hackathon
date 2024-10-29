@@ -27,9 +27,13 @@ export class PositionsService {
         );
       }),
     );
+
+    console.log('bb', balances);
+
     const allBalances = [];
 
     balances.forEach((chainBalance) => {
+      if (chainBalance.error) return;
       chainBalance.data.items.forEach((balance) =>
         allBalances.push({
           address: balance.contract_address,

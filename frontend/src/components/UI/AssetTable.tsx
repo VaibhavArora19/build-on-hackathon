@@ -36,16 +36,16 @@ const AssetTable = (props: TProps) => {
           {props?.assets?.map((asset, index) => (
             <tr className="hover" key={index}>
               <td className="w-[500px] flex pt-4">
-                <Image src={assetNameToImage(asset.underlyingAssetSymbol)} alt="asset image" width={30} height={30} />
-                <span className="text-center align-middle pt-2 ml-2">{asset.underlyingAssetSymbol}</span>
+                <Image src={assetNameToImage(asset.underlyingAssetSymbol)} alt="asset image" width={28} height={28} />
+                <span className="text-center align-middle pt-1 ml-2">{asset.underlyingAssetSymbol}</span>
               </td>
-              <td className="w-[500px]">{asset.assetSupplyApy}</td>
+              <td className="w-[500px]">{asset.assetSupplyApy + "%"}</td>
               <td className="w-[500px]">
-                <Image src={CHAIN_CONFIG[asset.chainId]?.chainImageUrl} alt="asset image" width={30} height={30} />
+                <Image src={CHAIN_CONFIG[asset.chainId]?.chainImageUrl} alt="asset image" width={28} height={28} />
               </td>
               <td className="w-[300px]">
                 {" "}
-                {<Image src={protocolNameToImage(asset.protocolName as TProtocolName)} alt="asset image" width={30} height={30} />}
+                {<Image src={protocolNameToImage(asset.protocolName as TProtocolName)} alt="asset image" width={28} height={28} />}
               </td>
               <td>
                 <button
