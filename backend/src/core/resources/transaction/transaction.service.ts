@@ -102,6 +102,7 @@ export class TransactionService {
         to: '',
         type: 'SQUID',
         tx: squidTx,
+        chain: transactionPayload.fromChain,
       };
     } catch (error) {
       console.log('error: ', error);

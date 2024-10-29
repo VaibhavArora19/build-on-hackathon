@@ -17,9 +17,9 @@ export const useTransactionBuilder = (transactionPayload: TTransactionPayload | 
       });
 
       const data = await response.json();
-
       console.log("data is", data);
-      return data;
+
+      return { tx: data.data.tx, chain: data.data.chain };
     } catch (error) {
       console.log("error: ", error);
     }

@@ -8,6 +8,8 @@ import { useTransactionPayloadStore } from "@/redux/hooks";
 import { useTransactionBuilder } from "@/server/api/transaction";
 import { parseUnits } from "viem";
 import { useAccount } from "wagmi";
+import { ethers } from "ethers";
+import { executeTransaction } from "@/helpers/execute";
 
 export type TTransactionPayload = {
   fromChain: string;
@@ -22,7 +24,7 @@ export type TTransactionPayload = {
 const WithdrawModal = (props: { onClose: () => void }) => {
   const { fromToken, fromChain, toToken, toChain, protocolName, fromDecimals } = useTransactionPayloadStore();
   const [amount, setAmount] = useState("");
-  const { address } = useAccount();
+  const { address, chainId } = useAccount();
   const [transactionPayload, setTransactionPayload] = useState<TTransactionPayload | null>(null);
   const { data } = useTransactionBuilder(transactionPayload);
 
@@ -48,8 +50,14 @@ const WithdrawModal = (props: { onClose: () => void }) => {
     return () => clearTimeout(debouncedFunction);
   }, [amount, fromToken, fromChain, toToken, toChain, protocolName, address]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!transactionPayload) return;
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+
+    const signer = provider.getSigner();
+
+    await executeTransaction(chainId as number, signer, data);
   };
 
   return (
