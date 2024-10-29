@@ -32,6 +32,7 @@ export enum TAssetName {
   METH = "meth",
   USDE = "usde",
   FBTC = "fbtc",
+  WRSETH = "wrseth",
 }
 
 export type TBalance = {

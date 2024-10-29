@@ -76,6 +76,8 @@ export const assetNameToImage = (name: TAssetName | string, protocolName?: TProt
       return "/assets/icons/tokens/usde.png";
     case TAssetName.FBTC:
       return "/assets/icons/tokens/fbtc.png";
+    case TAssetName.WRSETH:
+      return "/assets/icons/tokens/rseth.png";
     default:
       return "/assets/icons/tokens/yearn-v3.png";
   }

@@ -36,7 +36,9 @@ const Table = (props: TProps) => {
                 <Image src={assetNameToImage(asset.underlyingAssetSymbol)} alt="asset image" width={30} height={30} />
                 <span className="text-center align-middle pt-2 ml-2">{asset.underlyingAssetSymbol}</span>
               </td>
-              <td className="w-[500px]">{asset.totalApys}</td>
+              <td className="w-[500px]">
+                {asset.totalApys.length > 1 ? asset.totalApys[0] + "% - " + asset.totalApys[asset.totalApys.length - 1] + "%" : asset.totalApys + "%"}
+              </td>
               <td className="w-[500px]">
                 {!Array.isArray(asset.chainIds) ? (
                   <Image src={CHAIN_CONFIG[asset.chainIds]?.chainImageUrl} alt="asset image" width={30} height={30} />

@@ -15,6 +15,7 @@ export enum TProtocolName {
   YEARN = "yearn",
   STARGATE = "stargate",
   BENQI = "benqi",
+  MENDI = "mendi",
 }
 
 export enum ProtocolType {

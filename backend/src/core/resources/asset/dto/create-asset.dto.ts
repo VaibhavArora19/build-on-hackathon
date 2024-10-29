@@ -36,4 +36,8 @@ export class CreateAssetDto {
   @IsNumber()
   @IsNotEmpty()
   underlyingAssetDecimals: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  assetSupplyApy: number;
 }

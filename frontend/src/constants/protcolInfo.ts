@@ -1,6 +1,7 @@
 import { TProtocolName } from "@/types/protocol";
 
 export const protocolNameToImage = (name: TProtocolName) => {
+  console.log("name", name);
   switch (name.toLowerCase()) {
     case TProtocolName.AAVE:
       return "/assets/icons/protocols/aave.png";
@@ -34,7 +35,9 @@ export const protocolNameToImage = (name: TProtocolName) => {
       return "/assets/icons/protocols/benqi.png";
     case TProtocolName.LENDLE:
       return "/assets/icons/protocols/lendle.png";
+    case TProtocolName.MENDI:
+      return "/assets/icons/protocols/mendi.png";
     default:
-      return "";
+      return "/assets/icons/protocols/mendi.png";
   }
 };
