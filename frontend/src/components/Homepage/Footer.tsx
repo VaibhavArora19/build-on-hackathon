@@ -1,8 +1,6 @@
-import { useRouter } from "next/navigation";
 import React from "react";
 
 const Footer = () => {
-  const router = useRouter();
   return (
     <div className="w-full text-white px-20 mt-[150px]">
       <h2 className="text-3xl font-semibold mb-10">CrossFi.</h2>
@@ -12,7 +10,7 @@ const Footer = () => {
       </p>
 
       <div className="flex justify-between font-light text-white items-center">
-        <p className="text-sm">&#169; 2023 CrossFi.</p>
+        <p className="text-sm">&#169; 2024 CrossFi.</p>
       </div>
     </div>
   );

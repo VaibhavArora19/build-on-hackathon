@@ -85,7 +85,7 @@ const About = () => {
             }}
             className="flex items-center hover:text-[#7CFEA2] cursor-pointer"
           >
-            Use Explorer{" "}
+            Lend here{" "}
             <span>
               <BsArrowRightShort size={25} />
             </span>
