@@ -7,6 +7,7 @@ import { useFetchPositions } from "@/server/api/positions";
 import { useState } from "react";
 import { useAccount } from "wagmi";
 import { useDispatch } from "react-redux";
+import BasicInfo from "@/components/Info/BasicInfo";
 
 export type TPositionedAsset = {
   address: string;
@@ -27,9 +28,16 @@ const PositionsPage = () => {
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const dispatch = useDispatch();
 
+  console.log("positions are: ", data?.data);
+
   return (
     <div>
-      {data?.data ? <PositionsTable assets={data?.data} setShowWithdrawModal={setShowWithdrawModal} /> : <></>}
+      <BasicInfo />
+      {data?.data && data?.data.length > 0 ? (
+        <PositionsTable assets={data?.data} setShowWithdrawModal={setShowWithdrawModal} />
+      ) : (
+        <h1 className="text-center mx-auto mt-20 text-xl">No positions found...</h1>
+      )}
       {showWithdrawModal && (
         <WithdrawModal
           onClose={() => {

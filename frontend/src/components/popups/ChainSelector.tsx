@@ -42,7 +42,7 @@ const ChainSelector = (props: { type: "SUPPLY" | "WITHDRAW" }) => {
             </span>
           </>
         ) : ( */}
-        <button className="mx-auto cursor-pointer btn btn-primary">
+        <button className="mx-auto cursor-pointer btn btn-neutral">
           {props.type === "SUPPLY" && fromChain
             ? CHAIN_CONFIG[fromChain].chainName
             : props.type === "WITHDRAW" && toChain

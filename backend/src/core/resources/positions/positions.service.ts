@@ -32,6 +32,7 @@ export class PositionsService {
 
     const allBalances = [];
 
+    //*merge them into single array
     balances.forEach((chainBalance) => {
       if (chainBalance.error) return;
       chainBalance.data.items.forEach((balance) =>
@@ -45,6 +46,7 @@ export class PositionsService {
       );
     });
 
+    //*find only those that exist in our db
     const formattedBalance = allBalances.filter((balance) =>
       assets.some(
         (asset) =>
@@ -61,7 +63,7 @@ export class PositionsService {
           ethers.getAddress(balance.address),
       );
 
-      if (asset)
+      if (asset && balance.balance != '0')
         return {
           ...balance,
           chainId: asset.chainId,
@@ -70,8 +72,11 @@ export class PositionsService {
           underlyingAssetAddress: asset.underlyingAssetAddress,
           assetDecimals: asset.assetDecimals,
         };
-      return balance;
     });
-    return balanceWithChain;
+    const clearedBalance = balanceWithChain.filter(
+      (balance) => balance !== undefined,
+    );
+    console.log('balance with chain', balanceWithChain);
+    return clearedBalance;
   }
 }

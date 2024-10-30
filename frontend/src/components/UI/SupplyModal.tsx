@@ -84,7 +84,7 @@ const SupplyModal = (props: { onClose: () => void }) => {
           <TokenSelector type="SUPPLY" />
         </div>
         <h3 className="text-gray-500 text-sm pt-2">Estimated details</h3>
-        <div className="mt-2 bg-primary h-[88px]">
+        <div className="mt-2 bg-[#0a0a0a] h-[88px]">
           <div className="flex justify-between">
             <h1 className="pl-4 pt-4">Min received on dest chain</h1>
             <p className="pt-4 pr-2">
@@ -106,7 +106,7 @@ const SupplyModal = (props: { onClose: () => void }) => {
             </p>
           </div>
         </div>
-        <button className={`btn btn-primary w-full mt-8 ${isLoading && "btn-disabled"}`} onClick={handleSubmit}>
+        <button className={`btn btn-neutral  w-full mt-8 ${isLoading && "btn-disabled"}`} onClick={handleSubmit}>
           <span className={isLoading ? "loading loading-spinner" : ""}>{isLoading ? "Fetching..." : "Supply"}</span>
         </button>
       </div>

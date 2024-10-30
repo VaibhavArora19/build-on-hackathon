@@ -38,7 +38,7 @@ const TokenSelector = (props: { type: "SUPPLY" | "WITHDRAW" }) => {
             <span className="text-xs uppercase">{selectedToken.tokenName}</span>
           </>
         ) : ( */}
-        <button className="mx-auto cursor-pointer btn btn-primary">{selectedToken ? selectedToken.tokenName : "Token"}</button>
+        <button className="mx-auto cursor-pointer btn btn-neutral">{selectedToken ? selectedToken.tokenName : "Token"}</button>
         {/* )} */}
       </div>
 

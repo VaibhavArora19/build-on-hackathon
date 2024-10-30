@@ -12,11 +12,14 @@ const config: Config = {
       fontFamily: {
         "noto-sans": ["Noto-Sans", "sans-serif"],
       },
+      animation: {
+        "spin-extraSlow": "spin 15s linear infinite",
+      },
     },
   },
   plugins: [daisyui],
   daisyui: {
-    themes: ["black"],
+    themes: ["black", "night", "forest"],
   },
 };
 export default config;

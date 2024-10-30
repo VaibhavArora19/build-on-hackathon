@@ -49,7 +49,7 @@ const AssetTable = (props: TProps) => {
               </td>
               <td>
                 <button
-                  className="btn btn-primary w-full text-md"
+                  className="btn btn-neutral w-full text-md"
                   onClick={() => {
                     if (!props.setShowModal) {
                       router.push(`/lend/${asset.underlyingAssetSymbol}`);

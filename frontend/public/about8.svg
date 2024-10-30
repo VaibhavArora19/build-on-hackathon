@@ -1,0 +1,21 @@
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" fill="none">
+  <path d="M52 67L206 57V225L52 215V67Z" fill="#4D21C9"/>
+  <path d="M236 67L376 57V225L236 215V67Z" fill="#4D21C9"/>
+  <path d="M52 251L164 241V409L52 399V251Z" fill="#1A1A1A"/>
+  <path d="M236 251L331 241V409L236 399V251Z" fill="#4D21C9"/>
+  <path d="M420 251L496 241V409L420 399V251Z" fill="#4D21C9"/>
+  <path d="M52 435L109 425V593L52 583V435Z" fill="#4D21C9"/>
+  <path d="M236 435L275 425V593L236 583V435Z" fill="#F5F5F5"/>
+  <path d="M420 435L442 425V593L420 583V435Z" fill="#4D21C9"/>
+  <path d="M420 67L548 57V225L420 215V67Z" fill="#1A1A1A"/>
+  <path d="M206 57L220 67V215L206 225V57Z" fill="#441ABB"/>
+  <path d="M376 57L404 67V215L376 225V57Z" fill="#441ABB"/>
+  <path d="M164 241L220 251V399L164 409V241Z" fill="black"/>
+  <path d="M331 241L404 251V399L331 409V241Z" fill="#441ABB"/>
+  <path d="M496 241L588 251V399L496 409V241Z" fill="#441ABB"/>
+  <path d="M109 425L220 435V583L109 593V425Z" fill="#441ABB"/>
+  <path d="M275 425L404 435V583L275 593V425Z" fill="#DDDDDD"/>
+  <path d="M442 425L588 435V583L442 593V425Z" fill="#441ABB"/>
+  <path d="M548 57L588 67V215L548 225V57Z" fill="black"/>
+</svg>

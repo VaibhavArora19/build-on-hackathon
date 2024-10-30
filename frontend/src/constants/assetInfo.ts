@@ -13,6 +13,7 @@ export const assetNameToImage = (name: TAssetName | string, protocolName?: TProt
       return "/assets/icons/tokens/harvest.png";
   }
 
+  console.log("name is", name);
   switch (name.toLowerCase()) {
     case TAssetName.WETH:
       return "/assets/icons/tokens/weth.png";

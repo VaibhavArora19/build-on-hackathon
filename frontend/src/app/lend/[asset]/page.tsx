@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useFetchAssetBySymbol } from "@/server/api/asset";
 import { useParams } from "next/navigation";
 import AssetTable from "@/components/UI/AssetTable";
+import BasicInfo from "@/components/Info/BasicInfo";
 
 export type Asset = {
   underlyingAssetSymbol: string;
@@ -29,6 +30,7 @@ const AssetPage = () => {
 
   return (
     <div>
+      <BasicInfo />
       <AssetTable assets={data?.data.data} setShowModal={setShowModal} />
       {showModal && (
         <SupplyModal

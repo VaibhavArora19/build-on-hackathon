@@ -42,7 +42,7 @@ const PositionsTable = (props: { assets: TPositionedAsset[]; setShowWithdrawModa
               </td>
               <td>
                 <button
-                  className="btn btn-primary w-full text-md"
+                  className="btn btn-neutral w-full text-md"
                   onClick={() => {
                     dispatch(transactionPayloadActions.setFromToken(asset.address));
                     dispatch(transactionPayloadActions.setFromChain(asset.chainId));
