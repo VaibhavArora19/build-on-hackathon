@@ -73,7 +73,7 @@ const WithdrawModal = (props: { onClose: () => void }) => {
 
     console.log("data is", data);
     for (let i = 0; i < data.length; i++) {
-      await executeWithdrawTransaction(chainId as number, signer, data[i]);
+      await executeWithdrawTransaction(chainId.toString(), signer, data[i]);
     }
   };
 

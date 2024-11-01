@@ -9,7 +9,7 @@ export const sleep = (ms: number) => {
 export const executeTransaction = async (
   chainId: string,
   signer: ethers.providers.JsonRpcSigner,
-  transaction: { chain: number; tx: RouteResponse["route"] }
+  transaction: { chain: string; tx: RouteResponse["route"] }
 ) => {
   if (chainId !== transaction.chain) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -28,9 +28,9 @@ export const executeTransaction = async (
 };
 
 export const executeWithdrawTransaction = async (
-  chainId: number,
+  chainId: string,
   signer: ethers.providers.JsonRpcSigner,
-  transaction: { chain: number; type: string; tx: RouteResponse["route"] | string; to: string }
+  transaction: { chain: string; type: string; tx: RouteResponse["route"] | string; to: string }
 ) => {
   if (chainId !== transaction.chain) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

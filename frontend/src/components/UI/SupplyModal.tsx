@@ -69,7 +69,7 @@ const SupplyModal = (props: { onClose: () => void }) => {
 
     const signer = provider.getSigner();
 
-    await executeTransaction(chainId as number, signer, data);
+    await executeTransaction(chainId.toString(), signer, data);
   };
 
   return (
