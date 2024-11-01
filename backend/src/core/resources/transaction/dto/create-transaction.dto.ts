@@ -28,4 +28,8 @@ export class CreateTransactionDto {
   @IsString()
   @IsNotEmpty()
   protocolName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  type: string;
 }

@@ -87,7 +87,10 @@ export class AssetRepository {
 
   async getAssetByProtocol(asset: Partial<CreateAssetDto>) {
     const data = await this.assetModel.findOne({
-      underlyingAssetAddress: asset.underlyingAssetAddress,
+      $or: [
+        { underlyingAssetAddress: asset?.underlyingAssetAddress },
+        { assetAddress: asset?.assetAddress },
+      ],
       chainId: asset.chainId,
       protocolName: asset.protocolName,
     });

@@ -9,7 +9,7 @@ import { useTransactionBuilder } from "@/server/api/transaction";
 import { parseUnits } from "viem";
 import { useAccount } from "wagmi";
 import { ethers } from "ethers";
-import { executeTransaction } from "@/helpers/execute";
+import { executeWithdrawTransaction } from "@/helpers/execute";
 import { Skeleton } from "@mui/material";
 
 export type TTransactionPayload = {
@@ -20,6 +20,7 @@ export type TTransactionPayload = {
   fromAmount: string;
   protocolName: string;
   userAddress: string;
+  type: "SUPPLY" | "WITHDRAW";
 };
 
 const WithdrawModal = (props: { onClose: () => void }) => {
@@ -31,6 +32,7 @@ const WithdrawModal = (props: { onClose: () => void }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const prepareTransactionPayload = useCallback(() => {
+    console.log("details", { fromToken, fromChain, toToken, toChain, protocolName, fromDecimals });
     if (!amount || !fromToken || !fromChain || !toToken || !toChain || !protocolName || !address) return;
 
     setTransactionPayload({
@@ -41,12 +43,15 @@ const WithdrawModal = (props: { onClose: () => void }) => {
       fromAmount: parseUnits(amount, fromDecimals).toString(),
       protocolName,
       userAddress: address,
+      type: "WITHDRAW",
     });
     setIsLoading(true);
   }, [amount, fromToken, fromChain, toToken, toChain, protocolName, fromDecimals, address]);
 
   useEffect(() => {
     if (data) setIsLoading(false);
+
+    console.log("dddd", data);
   }, [data]);
 
   useEffect(() => {
@@ -66,7 +71,10 @@ const WithdrawModal = (props: { onClose: () => void }) => {
 
     const signer = provider.getSigner();
 
-    await executeTransaction(chainId as number, signer, data);
+    console.log("data is", data);
+    for (let i = 0; i < data.length; i++) {
+      await executeWithdrawTransaction(chainId as number, signer, data[i]);
+    }
   };
 
   return (
@@ -89,8 +97,8 @@ const WithdrawModal = (props: { onClose: () => void }) => {
           <div className="flex justify-between">
             <h1 className="pl-4 pt-4">Min received on dest chain</h1>
             <p className="pt-4 pr-2">
-              {data?.tx?.estimate?.toAmountMinUSD ? (
-                <span>{data?.tx?.estimate?.toAmountMinUSD + "$  "}</span>
+              {data && data[2]?.tx?.estimate?.toAmountMinUSD ? (
+                <span>{data && data[2]?.tx?.estimate?.toAmountMinUSD + "$  "}</span>
               ) : (
                 <Skeleton width={90} height={20} variant="rectangular" sx={{ bgcolor: "grey.900", borderRadius: "8px" }} />
               )}
@@ -99,8 +107,8 @@ const WithdrawModal = (props: { onClose: () => void }) => {
           <div className="flex justify-between">
             <h1 className="pl-4 pt-2">Estimated fee</h1>
             <p className="pt-2 pr-2">
-              {data?.tx?.estimate?.feeCosts[0]?.amountUsd ? (
-                <span>{data?.tx?.estimate?.feeCosts[0]?.amountUsd + "$"}</span>
+              {data && data[2]?.tx?.estimate?.feeCosts[0]?.amountUsd ? (
+                <span>{data && data[2]?.tx?.estimate?.feeCosts[0]?.amountUsd + "$"}</span>
               ) : (
                 <Skeleton width={90} height={20} variant="rectangular" sx={{ bgcolor: "grey.900", borderRadius: "8px" }} />
               )}

@@ -61,6 +61,8 @@ export class SquidService {
         config.postHook = squidQuoteArgs.postHook;
       }
 
+      console.log('pp', config);
+
       const { route } = await this.squid.getRoute(config);
 
       return route;

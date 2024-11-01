@@ -46,6 +46,8 @@ const PositionsTable = (props: { assets: TPositionedAsset[]; setShowWithdrawModa
                   onClick={() => {
                     dispatch(transactionPayloadActions.setFromToken(asset.address));
                     dispatch(transactionPayloadActions.setFromChain(asset.chainId));
+                    dispatch(transactionPayloadActions.setProtocolName(asset.protocolName));
+                    dispatch(transactionPayloadActions.setFromDecimals(asset.assetDecimals));
                     props.setShowWithdrawModal(true);
                   }}
                 >

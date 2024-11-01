@@ -20,6 +20,7 @@ export type TTransactionPayload = {
   fromAmount: string;
   protocolName: string;
   userAddress: string;
+  type: "SUPPLY" | "WITHDRAW";
 };
 
 const SupplyModal = (props: { onClose: () => void }) => {
@@ -42,6 +43,7 @@ const SupplyModal = (props: { onClose: () => void }) => {
       fromAmount: parseUnits(amount, fromDecimals).toString(),
       protocolName,
       userAddress: address,
+      type: "SUPPLY",
     });
     setIsLoading(true);
   }, [amount, fromToken, fromChain, toToken, toChain, protocolName, fromDecimals, address]);
