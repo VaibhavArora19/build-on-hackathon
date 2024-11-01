@@ -66,6 +66,9 @@ export class PositionsService {
       if (asset && balance.balance != '0')
         return {
           ...balance,
+          balance: ethers
+            .formatUnits(balance.balance, asset.assetDecimals)
+            .substring(0, 8),
           chainId: asset.chainId,
           protocolName: asset.protocolName,
           underlyingAssetSymbol: asset.underlyingAssetSymbol,
