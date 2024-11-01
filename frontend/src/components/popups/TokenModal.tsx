@@ -92,17 +92,17 @@ const TokenModal = ({
 
         <div className="overflow-hidden">
           {tokenList.length > 0 &&
-            tokenList.map((token: any) => (
+            tokenList.map((token: Token) => (
               <TokenItem
                 onSelect={onSelect}
                 onClose={onClose}
                 token={{
                   tokenName: token.symbol,
                   logo: token.logoURI,
-                  balance: token?.balance || 0,
+                  balance: 0,
                   address: token.address,
                   decimals: token.decimals,
-                  balanceUSD: token?.balanceUSD || 0,
+                  balanceUSD: 0,
                 }}
                 key={token.address}
               />

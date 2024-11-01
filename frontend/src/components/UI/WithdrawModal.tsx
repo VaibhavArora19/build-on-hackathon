@@ -60,6 +60,8 @@ const WithdrawModal = (props: { onClose: () => void }) => {
   const handleSubmit = async () => {
     if (!transactionPayload) return;
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
 
     const signer = provider.getSigner();

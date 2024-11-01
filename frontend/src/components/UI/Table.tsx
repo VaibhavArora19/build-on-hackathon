@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { protocolNameToImage } from "@/constants/protcolInfo";
 import { TProtocolName } from "@/types/protocol";
-import { AssetList } from "@/app/page";
+import { AssetList } from "@/app/lend/page";
 import { assetNameToImage } from "@/constants/assetInfo";
 
 type TProps = {
